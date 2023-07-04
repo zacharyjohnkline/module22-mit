@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>List All Users Raw</h1>
+        <button class="button" type="button" onclick="showData()">Show Raw Data</button>
+        <div id="status"></div>
+    </div>
+    <script>
+        function showData() {
+            var status  = document.getElementById('status');
+            var url = '/data';
+
+            superagent
+                .get(url)
+                .end(function(err,res){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log(res);
+                        status.insertAdjacentHTML("afterbegin", JSON.stringify(res.body));
+                    }
+                });
+        }
+
+    </script>
+    
+</body>
+</html>
